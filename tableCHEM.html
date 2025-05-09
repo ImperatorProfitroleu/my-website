@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Периодическая таблица Менделеева</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+            height: 60px;
+            width: 60px;
+            cursor: pointer;
+        }
+        .nonmetal {
+            background-color: #ff9999;
+        }
+        .metal {
+            background-color: #99ccff;
+        }
+        .empty {
+            background-color: white;
+            border: none;
+        }
+        .header {
+            font-size: 16px;
+            font-weight: bold;
+            background-color: white;
+            border: none;
+        }
+        .sub-row {
+            font-size: 10px;
+            background-color: #99ccff;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            text-align: left;
+            color: #333;
+            font-size: 14px;
+        }
+        .close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Периодическая таблица Менделеева VI</div>
+    <table>
+        <!-- Заголовок таблицы с номерами групп -->
+        <tr>
+            <td class="header"></td>
+            <td class="header">I</td>
+            <td class="header">II</td>
+            <td class="header">III</td>
+            <td class="header">IV</td>
+            <td class="header">V</td>
+            <td class="header">VI</td>
+            <td class="header">VII</td>
+            <td class="header">VIII</td>
+            <td class="header"></td>
+        </tr>
+
+        <!-- Период 1 -->
+        <tr>
+            <td class="header">1</td>
+            <td class="nonmetal" data-info='{"symbol":"H","number":"1","mass":"1.00794","oxidation":"±1","reactivity":{"hcl":"Не реагирует","hno3":"Не реагирует"},"appearance":"Цветный газ"}'>H<br>1<br>1.00794</td>
+            <td class="empty" colspan="6"></td>
+            <td class="nonmetal" data-info='{"symbol":"He","number":"2","mass":"4.002602","oxidation":"0","reactivity":{"hcl":"Не реагирует","hno3":"Не реагирует"},"appearance":"Цветный газ"}'>He<br>2<br>4.002602</td>
+            <td class="metal" data-info='{"symbol":"U","number":"92","mass":"238.02891","oxidation":"+6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристо-белый металл"}'>U<br>92<br>238.02891</td>
+        </tr>
+
+        <!-- Период 2 -->
+        <tr>
+            <td class="header">2</td>
+            <td class="metal" data-info='{"symbol":"Li","number":"3","mass":"6.941","oxidation":"+1","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Мягкий серебристый металл"}'>Li<br>3<br>6.941</td>
+            <td class="metal" data-info='{"symbol":"Be","number":"4","mass":"9.012182","oxidation":"+2","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Серый металл"}'>Be<br>4<br>9.012182</td>
+            <td class="nonmetal" data-info='{"symbol":"B","number":"5","mass":"10.811","oxidation":"+3","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Тёмно-коричневый порошок"}'>B<br>5<br>10.811</td>
+            <td class="nonmetal" data-info='{"symbol":"C","number":"6","mass":"12.0107","oxidation":"±4","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Чёрный твёрдый материал"}'>C<br>6<br>12.0107</td>
+            <td class="nonmetal" data-info='{"symbol":"N","number":"7","mass":"14.00674","oxidation":"-3, +5","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Цветный газ"}'>N<br>7<br>14.00674</td>
+            <td class="nonmetal" data-info='{"symbol":"O","number":"8","mass":"15.9994","oxidation":"-2","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Цветный газ"}'>O<br>8<br>15.9994</td>
+            <td class="nonmetal" data-info='{"symbol":"F","number":"9","mass":"18.998403","oxidation":"-1","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Жёлтый газ"}'>F<br>9<br>18.998403</td>
+            <td class="nonmetal" data-info='{"symbol":"Ne","number":"10","mass":"20.1797","oxidation":"0","reactivity":{"hcl":"Не реагирует","hno3":"Не реагирует"},"appearance":"Цветный газ"}'>Ne<br>10<br>20.1797</td>
+            <td class="empty"></td>
+        </tr>
+
+        <!-- Период 3 -->
+        <tr>
+            <td class="header">3</td>
+            <td class="metal" data-info='{"symbol":"Na","number":"11","mass":"22.98977","oxidation":"+1","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Мягкий серебристый металл"}'>Na<br>11<br>22.98977</td>
+            <td class="metal" data-info='{"symbol":"Mg","number":"12","mass":"24.3050","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Mg<br>12<br>24.3050</td>
+            <td class="metal" data-info='{"symbol":"Al","number":"13","mass":"26.981538","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Al<br>13<br>26.981538</td>
+            <td class="nonmetal" data-info='{"symbol":"Si","number":"14","mass":"28.0855","oxidation":"±4","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Серый твёрдый материал"}'>Si<br>14<br>28.0855</td>
+            <td class="nonmetal" data-info='{"symbol":"P","number":"15","mass":"30.973761","oxidation":"-3, +5","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Красный или белый порошок"}'>P<br>15<br>30.973761</td>
+            <td class="nonmetal" data-info='{"symbol":"S","number":"16","mass":"32.066","oxidation":"-2, +6","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Жёлтый порошок"}'>S<br>16<br>32.066</td>
+            <td class="nonmetal" data-info='{"symbol":"Cl","number":"17","mass":"35.4527","oxidation":"-1, +7","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Жёлто-зелёный газ"}'>Cl<br>17<br>35.4527</td>
+            <td class="nonmetal" data-info='{"symbol":"Ar","number":"18","mass":"39.948","oxidation":"0","reactivity":{"hcl":"Не реагирует","hno3":"Не реагирует"},"appearance":"Цветный газ"}'>Ar<br>18<br>39.948</td>
+            <td class="empty"></td>
+        </tr>
+
+        <!-- Период 4 -->
+        <tr>
+            <td class="header">4</td>
+            <td class="metal" data-info='{"symbol":"K","number":"19","mass":"39.0983","oxidation":"+1","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Мягкий серебристый металл"}'>K<br>19<br>39.0983</td>
+            <td class="metal" data-info='{"symbol":"Ca","number":"20","mass":"40.078","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Ca<br>20<br>40.078</td>
+            <td class="metal" data-info='{"symbol":"Sc","number":"21","mass":"44.955912","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Sc<br>21<br>44.955912</td>
+            <td class="metal" data-info='{"symbol":"Ti","number":"22","mass":"47.867","oxidation":"+4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Ti<br>22<br>47.867</td>
+            <td class="metal" data-info='{"symbol":"V","number":"23","mass":"50.9415","oxidation":"+5","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>V<br>23<br>50.9415</td>
+            <td class="metal" data-info='{"symbol":"Cr","number":"24","mass":"51.9961","oxidation":"+3, +6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Cr<br>24<br>51.9961</td>
+            <td class="metal" data-info='{"symbol":"Mn","number":"25","mass":"54.938049","oxidation":"+2, +7","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Mn<br>25<br>54.938049</td>
+            <td class="metal" data-info='{"symbol":"Fe","number":"26","mass":"55.845","oxidation":"+2, +3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Fe<br>26<br>55.845</td>
+            <td class="metal" data-info='{"symbol":"Co","number":"27","mass":"58.933200","oxidation":"+2, +3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Co<br>27<br>58.933200</td>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="metal" data-info='{"symbol":"Cu","number":"29","mass":"63.546","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Медный металл"}'>Cu<br>29<br>63.546</td>
+            <td class="metal" data-info='{"symbol":"Zn","number":"30","mass":"65.39","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Zn<br>30<br>65.39</td>
+            <td class="metal" data-info='{"symbol":"Ga","number":"31","mass":"69.723","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Ga<br>31<br>69.723</td>
+            <td class="nonmetal" data-info='{"symbol":"Ge","number":"32","mass":"72.61","oxidation":"±4","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Серый металл"}'>Ge<br>32<br>72.61</td>
+            <td class="nonmetal" data-info='{"symbol":"As","number":"33","mass":"74.92160","oxidation":"-3, +5","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Серый металл"}'>As<br>33<br>74.92160</td>
+            <td class="nonmetal" data-info='{"symbol":"Se","number":"34","mass":"78.96","oxidation":"-2, +6","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Серый порошок"}'>Se<br>34<br>78.96</td>
+            <td class="nonmetal" data-info='{"symbol":"Br","number":"35","mass":"79.904","oxidation":"-1","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Красновато-коричневая жидкость"}'>Br<br>35<br>79.904</td>
+            <td class="nonmetal" data-info='{"symbol":"Kr","number":"36","mass":"83.80","oxidation":"0","reactivity":{"hcl":"Не реагирует","hno3":"Не реагирует"},"appearance":"Цветный газ"}'>Kr<br>36<br>83.80</td>
+            <td class="empty"></td>
+        </tr>
+
+        <!-- Период 5 -->
+        <tr>
+            <td class="header">5</td>
+            <td class="metal" data-info='{"symbol":"Rb","number":"37","mass":"85.4678","oxidation":"+1","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Мягкий серебристый металл"}'>Rb<br>37<br>85.4678</td>
+            <td class="metal" data-info='{"symbol":"Sr","number":"38","mass":"87.62","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Sr<br>38<br>87.62</td>
+            <td class="metal" data-info='{"symbol":"Y","number":"39","mass":"88.90585","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Y<br>39<br>88.90585</td>
+            <td class="metal" data-info='{"symbol":"Zr","number":"40","mass":"91.224","oxidation":"+4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Zr<br>40<br>91.224</td>
+            <td class="metal" data-info='{"symbol":"Nb","number":"41","mass":"92.90638","oxidation":"+5","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Nb<br>41<br>92.90638</td>
+            <td class="metal" data-info='{"symbol":"Mo","number":"42","mass":"95.94","oxidation":"+6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Mo<br>42<br>95.94</td>
+            <td class="metal" data-info='{"symbol":"Tc","number":"43","mass":"(98)","oxidation":"+7","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Tc<br>43<br>(98)</td>
+            <td class="metal" data-info='{"symbol":"Ru","number":"44","mass":"101.07","oxidation":"+3, +4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Ru<br>44<br>101.07</td>
+            <td class="metal" data-info='{"symbol":"Rh","number":"45","mass":"102.90550","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Rh<br>45<br>102.90550</td>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="metal" data-info='{"symbol":"Ag","number":"47","mass":"107.8682","oxidation":"+1","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>Ag<br>47<br>107.8682</td>
+            <td class="metal" data-info='{"symbol":"Cd","number":"48","mass":"112.411","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Cd<br>48<br>112.411</td>
+            <td class="metal" data-info='{"symbol":"In","number":"49","mass":"114.818","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щелочами"},"appearance":"Серебристый металл"}'>In<br>49<br>114.818</td>
+            <td class="nonmetal" data-info='{"symbol":"Sn","number":"50","mass":"118.710","oxidation":"+2, +4","reactivity":{"hcl":"Sn + 2HCl → SnCl₂ + H₂↑","hno3":"Окисляется до Sn⁴⁺"},"appearance":"Серебристый металл"}'>Sn<br>50<br>118.710</td>
+            <td class="nonmetal" data-info='{"symbol":"Sb","number":"51","mass":"121.760","oxidation":"-3, +5","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Sb<br>51<br>121.760</td>
+            <td class="nonmetal" data-info='{"symbol":"Te","number":"52","mass":"127.60","oxidation":"-2, +6","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щeloчами"},"appearance":"Серый металл"}'>Te<br>52<br>127.60</td>
+            <td class="nonmetal" data-info='{"symbol":"I","number":"53","mass":"126.90447","oxidation":"-1","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щeloчами"},"appearance":"Тёмно-фиолетовые кристаллы"}'>I<br>53<br>126.90447</td>
+            <td class="nonmetal" data-info='{"symbol":"Xe","number":"54","mass":"131.29","oxidation":"0","reactivity":{"hcl":"Не реагирует","hno3":"Не реагирует"},"appearance":"Цветный газ"}'>Xe<br>54<br>131.29</td>
+            <td class="empty"></td>
+        </tr>
+
+        <!-- Период 6 -->
+        <tr>
+            <td class="header">6</td>
+            <td class="metal" data-info='{"symbol":"Cs","number":"55","mass":"132.90545","oxidation":"+1","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Мягкий серебристый металл"}'>Cs<br>55<br>132.90545</td>
+            <td class="metal" data-info='{"symbol":"Ba","number":"56","mass":"137.327","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Ba<br>56<br>137.327</td>
+            <td class="metal" data-info='{"symbol":"La","number":"57","mass":"138.9055","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>La<br>57<br>138.9055</td>
+            <td class="metal" data-info='{"symbol":"Hf","number":"72","mass":"178.49","oxidation":"+4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Hf<br>72<br>178.49</td>
+            <td class="metal" data-info='{"symbol":"Ta","number":"73","mass":"180.9479","oxidation":"+5","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Ta<br>73<br>180.9479</td>
+            <td class="metal" data-info='{"symbol":"W","number":"74","mass":"183.84","oxidation":"+6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>W<br>74<br>183.84</td>
+            <td class="metal" data-info='{"symbol":"Re","number":"75","mass":"186.207","oxidation":"+7","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Re<br>75<br>186.207</td>
+            <td class="metal" data-info='{"symbol":"Os","number":"76","mass":"190.23","oxidation":"+4, +8","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Os<br>76<br>190.23</td>
+            <td class="metal" data-info='{"symbol":"Ir","number":"77","mass":"192.217","oxidation":"+3, +4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Ir<br>77<br>192.217</td>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="metal" data-info='{"symbol":"Au","number":"79","mass":"196.96655","oxidation":"+3","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щeloчами"},"appearance":"Жёлтый металл"}'>Au<br>79<br>196.96655</td>
+            <td class="metal" data-info='{"symbol":"Hg","number":"80","mass":"200.59","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристая жидкость"}'>Hg<br>80<br>200.59</td>
+            <td class="metal" data-info='{"symbol":"Tl","number":"81","mass":"204.3833","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Tl<br>81<br>204.3833</td>
+            <td class="metal" data-info='{"symbol":"Pb","number":"82","mass":"207.2","oxidation":"+2, +4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Pb<br>82<br>207.2</td>
+            <td class="metal" data-info='{"symbol":"Bi","number":"83","mass":"208.98038","oxidation":"+3, +5","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Bi<br>83<br>208.98038</td>
+            <td class="metal" data-info='{"symbol":"Po","number":"84","mass":"(209)","oxidation":"+2, +4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Po<br>84<br>(209)</td>
+            <td class="metal" data-info='{"symbol":"At","number":"85","mass":"(210)","oxidation":"-1","reactivity":{"hcl":"Не реагирует","hno3":"Реагирует с щeloчами"},"appearance":"Металлоид"}'>At<br>85<br>(210)</td>
+            <td class="metal" data-info='{"symbol":"Rn","number":"86","mass":"(222)","oxidation":"0","reactivity":{"hcl":"Не реагирует","hno3":"Не реагирует"},"appearance":"Цветный газ"}'>Rn<br>86<br>(222)</td>
+            <td class="empty"></td>
+        </tr>
+
+        <!-- Период 7 -->
+        <tr>
+            <td class="header">7</td>
+            <td class="metal" data-info='{"symbol":"Fr","number":"87","mass":"(223)","oxidation":"+1","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Мягкий металл"}'>Fr<br>87<br>(223)</td>
+            <td class="metal" data-info='{"symbol":"Ra","number":"88","mass":"(226)","oxidation":"+2","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Ra<br>88<br>(226)</td>
+            <td class="metal" data-info='{"symbol":"Ac","number":"89","mass":"(227)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Ac<br>89<br>(227)</td>
+            <td class="metal" data-info='{"symbol":"Rf","number":"104","mass":"(261)","oxidation":"+4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Синтетический металл"}'>Rf<br>104<br>(261)</td>
+            <td class="metal" data-info='{"symbol":"Db","number":"105","mass":"(262)","oxidation":"+5","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Синтетический металл"}'>Db<br>105<br>(262)</td>
+            <td class="metal" data-info='{"symbol":"Sg","number":"106","mass":"(263)","oxidation":"+6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Синтетический металл"}'>Sg<br>106<br>(263)</td>
+            <td class="metal" data-info='{"symbol":"Bh","number":"107","mass":"(264)","oxidation":"+7","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Синтетический металл"}'>Bh<br>107<br>(264)</td>
+            <td class="metal" data-info='{"symbol":"Hs","number":"108","mass":"(265)","oxidation":"+8","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Синтетический металл"}'>Hs<br>108<br>(265)</td>
+            <td class="metal" data-info='{"symbol":"Mt","number":"109","mass":"(266)","oxidation":"+9","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Синтетический металл"}'>Mt<br>109<br>(266)</td>
+        </tr>
+
+        <!-- Лантаноиды -->
+        <tr>
+            <td class="header" colspan="10">Лантаноиды</td>
+        </tr>
+        <tr class="sub-row">
+            <td class="empty"></td>
+            <td class="metal" data-info='{"symbol":"Ce","number":"58","mass":"140.116","oxidation":"+3, +4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Ce<br>58<br>140.116</td>
+            <td class="metal" data-info='{"symbol":"Pr","number":"59","mass":"140.90765","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Pr<br>59<br>140.90765</td>
+            <td class="metal" data-info='{"symbol":"Nd","number":"60","mass":"144.24","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Nd<br>60<br>144.24</td>
+            <td class="metal" data-info='{"symbol":"Pm","number":"61","mass":"(145)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Pm<br>61<br>(145)</td>
+            <td class="metal" data-info='{"symbol":"Sm","number":"62","mass":"150.36","oxidation":"+2, +3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Sm<br>62<br>150.36</td>
+            <td class="metal" data-info='{"symbol":"Eu","number":"63","mass":"151.964","oxidation":"+2, +3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Eu<br>63<br>151.964</td>
+            <td class="metal" data-info='{"symbol":"Gd","number":"64","mass":"157.25","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Gd<br>64<br>157.25</td>
+            <td class="metal" data-info='{"symbol":"Tb","number":"65","mass":"158.92534","oxidation":"+3, +4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Tb<br>65<br>158.92534</td>
+            <td class="metal" data-info='{"symbol":"Dy","number":"66","mass":"162.50","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Dy<br>66<br>162.50</td>
+        </tr>
+        <tr class="sub-row">
+            <td class="empty"></td>
+            <td class="metal" data-info='{"symbol":"Ho","number":"67","mass":"164.93032","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Ho<br>67<br>164.93032</td>
+            <td class="metal" data-info='{"symbol":"Er","number":"68","mass":"167.26","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Er<br>68<br>167.26</td>
+            <td class="metal" data-info='{"symbol":"Tm","number":"69","mass":"168.93421","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Tm<br>69<br>168.93421</td>
+            <td class="metal" data-info='{"symbol":"Yb","number":"70","mass":"173.04","oxidation":"+2, +3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Yb<br>70<br>173.04</td>
+            <td class="metal" data-info='{"symbol":"Lu","number":"71","mass":"174.967","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Lu<br>71<br>174.967</td>
+            <td class="empty" colspan="4"></td>
+        </tr>
+
+        <!-- Актиноиды -->
+        <tr>
+            <td class="header" colspan="10">Актиноиды</td>
+        </tr>
+        <tr class="sub-row">
+            <td class="empty"></td>
+            <td class="metal" data-info='{"symbol":"Th","number":"90","mass":"232.0381","oxidation":"+4","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Th<br>90<br>232.0381</td>
+            <td class="metal" data-info='{"symbol":"Pa","number":"91","mass":"231.03588","oxidation":"+5","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Pa<br>91<br>231.03588</td>
+            <td class="metal" data-info='{"symbol":"U","number":"92","mass":"238.0289","oxidation":"+6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>U<br>92<br>238.0289</td>
+            <td class="metal" data-info='{"symbol":"Np","number":"93","mass":"(237)","oxidation":"+5, +6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Np<br>93<br>(237)</td>
+            <td class="metal" data-info='{"symbol":"Pu","number":"94","mass":"(244)","oxidation":"+4, +6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Pu<br>94<br>(244)</td>
+            <td class="metal" data-info='{"symbol":"Am","number":"95","mass":"(243)","oxidation":"+3, +6","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Am<br>95<br>(243)</td>
+            <td class="metal" data-info='{"symbol":"Cm","number":"96","mass":"(247)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Cm<br>96<br>(247)</td>
+            <td class="metal" data-info='{"symbol":"Bk","number":"97","mass":"(247)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Bk<br>97<br>(247)</td>
+            <td class="metal" data-info='{"symbol":"Cf","number":"98","mass":"(251)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Cf<br>98<br>(251)</td>
+        </tr>
+        <tr class="sub-row">
+            <td class="empty"></td>
+            <td class="metal" data-info='{"symbol":"Es","number":"99","mass":"(252)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Es<br>99<br>(252)</td>
+            <td class="metal" data-info='{"symbol":"Fm","number":"100","mass":"(257)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Fm<br>100<br>(257)</td>
+            <td class="metal" data-info='{"symbol":"Md","number":"101","mass":"(258)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Md<br>101<br>(258)</td>
+            <td class="metal" data-info='{"symbol":"No","number":"102","mass":"(259)","oxidation":"+2, +3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>No<br>102<br>(259)</td>
+            <td class="metal" data-info='{"symbol":"Lr","number":"103","mass":"(262)","oxidation":"+3","reactivity":{"hcl":"Реагирует с кислотами","hno3":"Реагирует с щeloчами"},"appearance":"Серебристый металл"}'>Lr<br>103<br>(262)</td>
+            <td class="empty" colspan="4"></td>
+        </tr>
+    </table>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Физические свойства:</h3>
+            <ul>
+                <li>Элемент: <span id="modal-symbol"></span></li>
+                <li>Температура плавления: <span id="modal-melting"></span>°C</li>
+                <li>Темпопроволочность и электропроводность: умеренные (ниже, чем у меди).</li>
+                <li>Пластичность: мягкий, легко гнётся и прокатывается в тонкие листы (станолы).</li>
+            </ul>
+            <h3>Химические свойства:</h3>
+            <ul>
+                <li>Степени окисления: <span id="modal-oxidation"></span></li>
+                <li>Реакция с кислотами:</li>
+                <ul>
+                    <li><span id="modal-hcl"></span></li>
+                </ul>
+                <li>Реакция с щелочами:</li>
+                <ul>
+                    <li><span id="modal-hno3"></span></li>
+                </ul>
+                <li>Реакция со щелочами:</li>
+                <ul>
+                    <li><span id="modal-appearance"></span></li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        document.querySelectorAll('td:not(.empty):not(.header)').forEach(cell => {
+            cell.addEventListener('click', () => {
+                const info = JSON.parse(cell.getAttribute('data-info'));
+                document.getElementById('modal-symbol').textContent = info.symbol;
+                document.getElementById('modal-melting').textContent = '231.9'; // Пример, можно добавить данные для каждого элемента
+                document.getElementById('modal-oxidation').textContent = info.oxidation;
+                document.getElementById('modal-hcl').textContent = info.reactivity.hcl;
+                document.getElementById('modal-hno3').textContent = info.reactivity.hno3;
+                document.getElementById('modal-appearance').textContent = info.appearance;
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
